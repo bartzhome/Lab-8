@@ -4,12 +4,15 @@ city = input ( "Please enter city and province: " )
 postal = input ( "Please enter a postal code: " )
 
 
-
 if city.endswith (", ")
+
+while not valid_input:
+     
+
 test  = city.split(", ")
 a,b = city.split (", ")
 
-while not valid_input:
+     
 
      if postal[0].isalpha() and postal[1].isdecimal() and postal[2].isalpha()\
      and postal[3].isspace() and postal[4].isdecimal() and postal[5].isalpha()\
@@ -20,10 +23,12 @@ while not valid_input:
           error_message = ("Your postal code is incorrect")
 
 
-     if  b == "AB" or b == "BC" or b == "MB" or b == "NB" or b == "NL" or b == "NT" or \
-     b == "NS" or b == "NU" or b == "ON" or  b == "PE" or b == "QC" or b == "SK" or \
-     b == "YT":
+     if  b.upper == "AB" or b.upper == "BC" or b.upper == "MB" or b.upper == "NB" or b.upper == "NL" or b.upper == "NT" or \
+     b.upper == "NS" or b.upper == "NU" or b.upper == "ON" or  b.upper == "PE" or b.upper == "QC" or b.upper == "SK" or \
+     b.upper == "YT":
           valid_province = True
      else:
           valid_province = False
           error_message = ("I'm sorry,") + str(b) + ("is an invalid province abbreviation.")
+
+
