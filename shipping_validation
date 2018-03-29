@@ -3,32 +3,64 @@ valid_input = False
 city = input ( "Please enter city and province: " )
 postal = input ( "Please enter a postal code: " )
 
-
+"""
 if city.endswith (", ")
+"""
 
 while not valid_input:
      
 
-test  = city.split(", ")
-a,b = city.split (", ")
+     test  = city.split(", ")
+     a,b = city.split (", ")
 
      
 
      if postal[0].isalpha() and postal[1].isdecimal() and postal[2].isalpha()\
-     and postal[3].isspace() and postal[4].isdecimal() and postal[5].isalpha()\
-     and postal[6].isdecimal():
+        and postal[3].isspace() and postal[4].isdecimal() and postal[5].isalpha()\
+        and postal[6].isdecimal():
           valid_postal = True
      else:
           valid_postal = False
           error_message = ("Your postal code is incorrect")
 
 
-     if  b.upper == "AB" or b.upper == "BC" or b.upper == "MB" or b.upper == "NB" or b.upper == "NL" or b.upper == "NT" or \
-     b.upper == "NS" or b.upper == "NU" or b.upper == "ON" or  b.upper == "PE" or b.upper == "QC" or b.upper == "SK" or \
-     b.upper == "YT":
+     if  b.upper() == "AB" or b.upper() == "BC" or b.upper() == "MB" or \
+         b.upper() == "NB" or b.upper() == "NL" or b.upper() == "NT" or \
+         b.upper() == "NS" or b.upper() == "NU" or b.upper() == "ON" or \
+         b.upper() == "PE" or b.upper() == "QC" or b.upper() == "SK" or \
+         b.upper() == "YT":
           valid_province = True
      else:
           valid_province = False
           error_message = ("I'm sorry,") + str(b) + ("is an invalid province abbreviation.")
 
-
+     if b.upper() == "AB" and postal[0].upper() in "T":
+          valid_code = True
+     if b.upper() == "BC" and postal[0].upper() in "V":
+          valid_code = True
+     if b.upper() == "MB" and postal[0].upper() in "R":
+          valid_code = True
+     if b.upper() == "NB" and postal[0].upper() in "E":
+          valid_code = True
+     if b.upper() == "NL" and postal[0].upper() in "A":
+          valid_code = True
+     if b.upper() == "NT" and postal[0].upper() in "X":
+          valid_code = True
+     if b.upper() == "NS" and postal[0].upper() in "B":
+          valid_code = True
+     if b.upper() == "NU" and postal[0].upper() in "X":
+          valid_code = True
+     if b.upper() == "ON" and postal[0].upper() in "KLMNP":
+          valid_code = True
+     if b.upper() == "PE" and postal[0].upper() in "C":
+          valid_code = True
+     if b.upper() == "QC" and postal[0].upper() in "GHJ":
+          valid_code = True
+     if b.upper() == "SK" and postal[0].upper() in "S":
+          valid_code = True
+     if b.upper() == "YT" and postal[0].upper() in "Y":
+          valid_code = True
+     else:
+          valid_code = False
+          error_message = ("I'm sorry, no postal codes in") + str(b) + ("start with") str(postal)
+          
