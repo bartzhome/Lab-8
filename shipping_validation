@@ -1,31 +1,28 @@
 def validate_address(city_province, postal):
-    # valid_postal = False
-    # valid_province = False
-    # valid_code = False
 
-    
+    error_message = ""
+    valid_message = "Your input was correct"
+
     if ", " not in city_province:
-        error_city_province = ("Your city and province are input inccorectly")
-        return False, error_city_province
+        error_message = ("Your city and province are input inccorectly")
+        return False, error_message
 
-    
+
     if len(postal) == 7 and postal[0].isalpha() and postal[1].isdecimal() and \
             postal[2].isalpha() and postal[3].isspace() and postal[4].isdecimal() \
             and postal[5].isalpha() and postal[6].isdecimal():
-        valid_postal = True
     else:
-        error_postal = "Your postal code is incorrect"
-        return False, error_postal
+        error_message = "Your postal code is incorrect"
+        return False, error_message
 
     city, province = city_province.split(", ")
     province = province.upper()
 
-   
-    if province not in ("AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"):
-        error_province = "I'm sorry, " + province + " is an invalid province abbreviation."
-        return False, error_province
 
-   
+    if province not in ("AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"):
+        error_message = "I'm sorry, " + province + " is an invalid province abbreviation."
+        return False, error_message
+
     postal_province_ok = False
     if province == 'AB' and postal[0] == 'T':
         postal_province_ok = True
@@ -55,18 +52,13 @@ def validate_address(city_province, postal):
         postal_province_ok = True
 
     if not postal_province_ok:
-        error_postal_province = "I'm sorry, no postal codes in " + province + " start with " + postal[0]
-        return False, (error_postal_province)
+        error_message = "I'm sorry, no postal codes in " + province + " start with " + postal[0]
+        return False, error_message
 
-    return True, ""
+    return True,  valid_message
 
 
 city_province = input("Please enter city and province (City, Province): ")
 postal = input("Please enter a postal code: ")
 
 address_ok, message = validate_address(city_province, postal)
-
-if address_ok:
-    print("Your input was correct")
-else:
-    print(message)
