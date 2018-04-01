@@ -19,8 +19,9 @@ def validate_address( city_province, postal ):
      else:
           return ( "Your postal code is incorrect format" )
 
-     #split city and provice into two different variables
+     #split city and province
      city, province = city_province.split( ", " )
+     #set province into variable
      province = province.upper()
 
      #check province abbreviation is valid
@@ -63,26 +64,26 @@ def validate_address( city_province, postal ):
           return ( "I'm sorry, no postal codes in " + province + \
                    " start with " + postal[0] )
      
-     return "Your input is correct"
+     return "Thank you, your data is validated"
 
 #get two lines of user input
 city_province = input( "Please enter city and province (City, Province): ")
 postal = input("Please enter a postal code: " )
 
-message = validate_address(city_province, postal)
+#set message to function
+message = validate_address( city_province, postal )
 
 #call to function
 #if returns true, prints message
-if validate_address(city_province, postal):
-     print (message)
+if validate_address( city_province, postal ):
+     print ( message )
 #if returns false, prints message
 else:
-    print(message)
+    print( message )
 
 '''
+testing purposes only. not sure how it works yet. 
 assert validate_address ( "Hamilton, ON" , "L8J 1V4" ) == ( "Your input is correct" )
 assert validate_address ( "Hamilton ON",  "L8J 1V4" ) == ( "I'm sorry, your city and province are input inccorectly" )
 assert validate_address ( "Hamilton, ON", "1V4 L8J" ) ==  ( "Your postal code is incorrect format" )
 ''' 
-
-
