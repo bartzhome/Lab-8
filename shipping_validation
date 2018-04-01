@@ -1,9 +1,12 @@
 # I, Bartosz Wojcik, 000033686, certify that all code submitted is my own work; that I have not copied it from any other source.  I also certify that I have not allowed my work to be copied by others.
+#function validate_address
 def validate_address( city_province, postal ):
 
+     #check input has comma and space
      if ", " not in city_province:
-        return False, "Your city and province are input inccorectly"
+        return False, "I'm sorry, your city and province are input inccorectly"
 
+     #check postal code is in proper format
      if len(postal) == 7 and \
         postal[0].isalpha() and \
         postal[1].isdecimal() and \
@@ -14,16 +17,19 @@ def validate_address( city_province, postal ):
           postal[6].isdecimal():
           pass
      else:
-          return ( False, "Your postal code is incorrect" )
+          return ( False, "Your postal code is incorrect format" )
 
+     #split city and provice into two different variables
      city, province = city_province.split( ", " )
      province = province.upper()
 
+     #check province abbreviation is valid
      if province not in ( "AB", "BC", "MB", "NB", "NL", "NT", "NS", \
                          "NU", "ON", "PE", "QC", "SK", "YT" ):
           return ( False, "I'm sorry, " + province + \
                    " is an invalid province abbreviation." )
 
+     #check province used and postal code used are valid
      postal_province_ok = False
      if province == 'AB' and postal[0].upper() == 'T':
         postal_province_ok = True
@@ -57,13 +63,16 @@ def validate_address( city_province, postal ):
      
      return True, ""
 
-
+#get two lines of user input
 city_province = input( "Please enter city and province (City, Province): ")
 postal = input("Please enter a postal code: " )
 
+#call to function
 address_ok, message = validate_address(city_province, postal)
 
+#if returns true, ok_address prints message
 if address_ok:
     print( "Your input was correct" )
+#if returns false, ok_address prints error message
 else:
     print(message)
