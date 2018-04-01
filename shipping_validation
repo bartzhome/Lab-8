@@ -57,11 +57,12 @@ def validate_address( city_province, postal ):
         postal_province_ok = True
      elif province == 'YT' and postal[0].upper() == 'Y':
         postal_province_ok = True
+        
      if not postal_province_ok:
           return ( False, "I'm sorry, no postal codes in " + province + \
                    " start with " + postal[0] )
      
-     return True, ""
+     return True, "Your input is correct"
 
 #get two lines of user input
 city_province = input( "Please enter city and province (City, Province): ")
@@ -72,7 +73,7 @@ address_ok, message = validate_address(city_province, postal)
 
 #if returns true, ok_address prints message
 if address_ok:
-    print( "Your input was correct" )
+     print (message)
 #if returns false, ok_address prints error message
 else:
     print(message)
