@@ -1,64 +1,69 @@
-def validate_address(city_province, postal):
+# I, Bartosz Wojcik, 000033686, certify that all code submitted is my own work; that I have not copied it from any other source.  I also certify that I have not allowed my work to be copied by others.
+def validate_address( city_province, postal ):
 
-    error_message = ""
-    valid_message = "Your input was correct"
+     if ", " not in city_province:
+        return False, "Your city and province are input inccorectly"
 
-    if ", " not in city_province:
-        error_message = ("Your city and province are input inccorectly")
-        return False, error_message
+     if len(postal) == 7 and \
+        postal[0].isalpha() and \
+        postal[1].isdecimal() and \
+          postal[2].isalpha() and  \
+          postal[3].isspace() and \
+          postal[4].isdecimal() \
+          and postal[5].isalpha() and \
+          postal[6].isdecimal():
+          pass
+     else:
+          return ( False, "Your postal code is incorrect" )
+
+     city, province = city_province.split( ", " )
+     province = province.upper()
+
+     if province not in ( "AB", "BC", "MB", "NB", "NL", "NT", "NS", \
+                         "NU", "ON", "PE", "QC", "SK", "YT" ):
+          return ( False, "I'm sorry, " + province + \
+                   " is an invalid province abbreviation." )
+
+     postal_province_ok = False
+     if province == 'AB' and postal[0].upper() == 'T':
+        postal_province_ok = True
+     elif province == 'BC' and postal[0].upper() == 'V':
+        postal_province_ok = True
+     elif province == 'MB' and postal[0].upper() == 'R':
+        postal_province_ok = True
+     elif province == 'NB' and postal[0].upper() == 'E':
+        postal_province_ok = True
+     elif province == 'NL' and postal[0].upper() == 'A':
+        postal_province_ok = True
+     elif province == 'NT' and postal[0].upper() == 'X':
+        postal_province_ok = True
+     elif province == 'NS' and postal[0].upper() == 'B':
+        postal_province_ok = True
+     elif province == 'NU' and postal[0].upper() == 'X':
+        postal_province_ok = True
+     elif province == 'ON' and postal[0].upper() in 'KLMNP':
+        postal_province_ok = True
+     elif province == 'PE' and postal[0].upper() == 'C':
+        postal_province_ok = True
+     elif province == 'QC' and postal[0].upper() in 'GHJ':
+        postal_province_ok = True
+     elif province == 'SK' and postal[0].upper() == 'S':
+        postal_province_ok = True
+     elif province == 'YT' and postal[0].upper() == 'Y':
+        postal_province_ok = True
+     if not postal_province_ok:
+          return ( False, "I'm sorry, no postal codes in " + province + \
+                   " start with " + postal[0] )
+     
+     return True, ""
 
 
-    if len(postal) == 7 and postal[0].isalpha() and postal[1].isdecimal() and \
-            postal[2].isalpha() and postal[3].isspace() and postal[4].isdecimal() \
-            and postal[5].isalpha() and postal[6].isdecimal():
-    else:
-        error_message = "Your postal code is incorrect"
-        return False, error_message
-
-    city, province = city_province.split(", ")
-    province = province.upper()
-
-
-    if province not in ("AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT"):
-        error_message = "I'm sorry, " + province + " is an invalid province abbreviation."
-        return False, error_message
-
-    postal_province_ok = False
-    if province == 'AB' and postal[0] == 'T':
-        postal_province_ok = True
-    elif province == 'BC' and postal[0] == 'V':
-        postal_province_ok = True
-    elif province == 'MB' and postal[0] == 'R':
-        postal_province_ok = True
-    elif province == 'NB' and postal[0] == 'E':
-        postal_province_ok = True
-    elif province == 'NL' and postal[0] == 'A':
-        postal_province_ok = True
-    elif province == 'NT' and postal[0] == 'X':
-        postal_province_ok = True
-    elif province == 'NS' and postal[0] == 'B':
-        postal_province_ok = True
-    elif province == 'NU' and postal[0] == 'X':
-        postal_province_ok = True
-    elif province == 'ON' and postal[0] in 'KLMNP':
-        postal_province_ok = True
-    elif province == 'PE' and postal[0] == 'C':
-        postal_province_ok = True
-    elif province == 'QC' and postal[0] in 'GHJ':
-        postal_province_ok = True
-    elif province == 'SK' and postal[0] == 'S':
-        postal_province_ok = True
-    elif province == 'YT' and postal[0] == 'Y':
-        postal_province_ok = True
-
-    if not postal_province_ok:
-        error_message = "I'm sorry, no postal codes in " + province + " start with " + postal[0]
-        return False, error_message
-
-    return True,  valid_message
-
-
-city_province = input("Please enter city and province (City, Province): ")
-postal = input("Please enter a postal code: ")
+city_province = input( "Please enter city and province (City, Province): ")
+postal = input("Please enter a postal code: " )
 
 address_ok, message = validate_address(city_province, postal)
+
+if address_ok:
+    print( "Your input was correct" )
+else:
+    print(message)
