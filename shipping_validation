@@ -4,20 +4,20 @@ def validate_address( city_province, postal ):
 
      #check input has comma and space
      if ", " not in city_province:
-        return False, "I'm sorry, your city and province are input inccorectly"
+        return "I'm sorry, your city and province are input inccorectly"
 
      #check postal code is in proper format
-     if len(postal) == 7 and \
+     if len( postal ) == 7 and \
         postal[0].isalpha() and \
         postal[1].isdecimal() and \
           postal[2].isalpha() and  \
           postal[3].isspace() and \
-          postal[4].isdecimal() \
-          and postal[5].isalpha() and \
+          postal[4].isdecimal() and \
+          postal[5].isalpha() and \
           postal[6].isdecimal():
           pass
      else:
-          return ( False, "Your postal code is incorrect format" )
+          return ( "Your postal code is incorrect format" )
 
      #split city and provice into two different variables
      city, province = city_province.split( ", " )
@@ -26,7 +26,7 @@ def validate_address( city_province, postal ):
      #check province abbreviation is valid
      if province not in ( "AB", "BC", "MB", "NB", "NL", "NT", "NS", \
                          "NU", "ON", "PE", "QC", "SK", "YT" ):
-          return ( False, "I'm sorry, " + province + \
+          return ( "I'm sorry, " + province + \
                    " is an invalid province abbreviation." )
 
      #check province used and postal code used are valid
@@ -59,21 +59,21 @@ def validate_address( city_province, postal ):
         postal_province_ok = True
         
      if not postal_province_ok:
-          return ( False, "I'm sorry, no postal codes in " + province + \
+          return ( "I'm sorry, no postal codes in " + province + \
                    " start with " + postal[0] )
      
-     return True, "Your input is correct"
+     return "Your input is correct"
 
 #get two lines of user input
 city_province = input( "Please enter city and province (City, Province): ")
 postal = input("Please enter a postal code: " )
 
-#call to function
-address_ok, message = validate_address(city_province, postal)
+message = validate_address(city_province, postal)
 
-#if returns true, ok_address prints message
-if address_ok:
+#call to function
+#if returns true, prints message
+if validate_address(city_province, postal):
      print (message)
-#if returns false, ok_address prints error message
+#if returns false, prints message
 else:
     print(message)
